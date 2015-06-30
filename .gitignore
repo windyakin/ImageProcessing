@@ -1,0 +1,10 @@
+data/
+
+*.sublime-workspace
+*.sublime-project
+
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+sftp-config.json
