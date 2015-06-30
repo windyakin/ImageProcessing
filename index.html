@@ -3,20 +3,59 @@
 <head>
 	<meta charset="UTF-8">
 	<title>画像処理 / 課題</title>
+	<link rel="stylesheet" type="text/css" href="http://cdn.honokak.osaka/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet/less" type="text/css" href="assets/css/style.less">
 </head>
-<body>
+<body class="no-thank-yu">
 
-<input type="file" id="file">
-<button id="reset">リセット</button>
-<button id="brightness">輝度</button>
-<button id="saturation">彩度</button>
-<button id="average">平均</button>
+<div class="container">
 
-<div>
-	<canvas id="canvas"></canvas>
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 class="page-header">JavaScriptだけで画像処理</h1>
+			<p>サーバサイド処理を一切使わずにJavaScriptだけをつかって画像処理をします。<a href="source/script.js">ソースコードを読む</a></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 control">
+			<div class="control-box">
+				<input type="file" id="file">
+
+				<button type="button" class="btn btn-default btn-sm" id="reset">画像リセット</button>
+
+				<label>グレースケール</label>
+				<div class="btn-group">
+					<button type="button" class="btn btn-default btn-sm" id="brightness">輝度</button>
+					<button type="button" class="btn btn-default btn-sm" id="saturation">彩度</button>
+					<button type="button" class="btn btn-default btn-sm" id="average">平均</button>	
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12">
+			<canvas id="canvas"></canvas>
+		</div>
+	</div>
+
 </div>
 
+
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 text-center copyright">
+				&copy; 2015 Takuto Kanzaki
+			</div>
+		</div>
+	</div>
+</footer>
+
 <script type="text/javascript" src="assets/lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="assets/lib/less.min.js"></script>
 <script type="text/javascript" src="source/script.js"></script>
 
 </body>

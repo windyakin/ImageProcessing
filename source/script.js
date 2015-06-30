@@ -149,7 +149,7 @@
 	};
 
 	$(document).ready(function($) {
-			new Images();
+		new Images();
 	});
 
 })(jQuery, window, undefined);

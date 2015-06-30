@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	padding-bottom: 70px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+}
+
+.page-header {
+	&::before {
+		content: '▶';
+		padding-right: 0.3em;
+	}
+}
+
+.control {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	.control-box {
+		padding: 20px;
+		border-radius: 5px;
+		border: 1px solid #CCC;
+		background: #FFF;
+	}
+}
+
+canvas#canvas {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+	border: 2px solid #CCC;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	margin: 20px 0 0;
+	line-height: 50px;
+	// border-top: 1px solid #CCC;
+	background: #FFF;
+}
