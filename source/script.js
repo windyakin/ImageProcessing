@@ -115,6 +115,7 @@
 			var create = this.context.createImageData(this.canvas.width, this.canvas.height);
 			// 今描画している画像のデータを取得
 			// var origin = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
+			// 元々の画像からデータを取得
 			var origin = this.originData;
 			var get = null;
 			switch(mode) {
@@ -136,14 +137,15 @@
 			}
 			for( var i = 0; i < origin.data.length/4; i++ ) {
 				var p = i*4;
-				// 輝度値を取得
-				var luminance = get({ r: origin.data[p], g: origin.data[p+1], b: origin.data[p+2] });
+				// 画素値を取得
+				var value = get({ r: origin.data[p], g: origin.data[p+1], b: origin.data[p+2] });
 				// 冗長だが Uint8ClampedArray に対して push() は出来ないようだ
-				create.data[p+0] = luminance;
-				create.data[p+1] = luminance;
-				create.data[p+2] = luminance;
+				create.data[p+0] = value;
+				create.data[p+1] = value;
+				create.data[p+2] = value;
 				create.data[p+3] = 255;
 			}
+			// 作成した画像に置き換え
 			this.context.putImageData(create, 0, 0);
 		}
 	};
