@@ -147,6 +147,37 @@
 			}
 			// 作成した画像に置き換え
 			this.context.putImageData(create, 0, 0);
+		},
+		// ---------------------------------------------------------------------------------------------
+		// 閾値による2値化
+		// ---------------------------------------------------------------------------------------------
+		renderThresholdImage: function(value) {
+
+			var create = this.context.createImageData(this.canvas.width, this.canvas.height);
+			var origin = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
+
+			for( var i = 0; i < origin.data.length/4; i++ ) {
+				var p = i*4;
+				// 画素値を取得
+				if ( ! (origin.data[p] === origin.data[p+1] && origin.data[p] === origin.data[p+2]) ) {
+					console.error("Please input gray scale image.");
+					return;
+				}
+				var pixel = origin.data[p];
+				if ( pixel > value ) {
+					create.data[p+0] = 255;
+					create.data[p+1] = 255;
+					create.data[p+2] = 255;
+				}
+				else {
+					create.data[p+0] = 0;
+					create.data[p+1] = 0;
+					create.data[p+2] = 0;
+				}
+				create.data[p+3] = 255;
+			}
+			// 作成した画像に置き換え
+			this.context.putImageData(create, 0, 0);
 		}
 	};
 
