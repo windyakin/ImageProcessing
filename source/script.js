@@ -65,6 +65,8 @@
 			var binaryway = $('#binary').val();
 			// 閾値による2値化の値取得
 			var threshold = $('#threshold').val();
+			// パターンディザのパターン選択
+			var mode = $('#pattern').val();
 
 			// 元の画像を描画する
 			this.renderOriginalImage();
@@ -77,7 +79,7 @@
 			}
 			else if ( binaryway === 'patterndither' ) {
 				// パターンディザ
-				this.renderPatternDitherImage('bayer');
+				this.renderPatternDitherImage(mode);
 			}
 		},
 		// ---------------------------------------------------------------------------------------------

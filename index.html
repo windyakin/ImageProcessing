@@ -38,7 +38,12 @@
 					<option value="errordiffusion">誤差拡散法(動きません)</option>
 				</select>
 				<label>閾値</label> <input type="number" id="threshold" class="form-control input-sm" min="0" max="255" value="128">
-				<button type="button" class="btn btn-default btn-sm" id="threshold-exec">実行</button>
+				<select class="form-control input-sm" id="pattern">
+					<option value="bayer">バイヤー型</option>
+					<option value="halftone">ハーフトーン型</option>
+					<option value="screw">スクリュー型</option>
+				</select>
+				<button type="button" class="btn btn-success btn-sm" id="threshold-exec">実行</button>
 
 			</div>
 		</div>
