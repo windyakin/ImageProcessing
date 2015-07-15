@@ -23,9 +23,7 @@
 				.on('change', '#file', $.proxy(this.changeFile, this))
 				.on('click', '#canvas', $.proxy(this.getColorClick, this))
 				.on('click', '#reset', $.proxy(this.renderOriginalImage, this))
-				.on('click', '#brightness', $.proxy(this.renderGrayScale, this, 'brightness'))
-				.on('click', '#saturation', $.proxy(this.renderGrayScale, this, 'saturation'))
-				.on('click', '#average', $.proxy(this.renderGrayScale, this, 'average'));
+				.on('click', '#threshold-exec', $.proxy(this.execBinaryImageProcess, this));
 		},
 		// ---------------------------------------------------------------------------------------------
 		// FileReader().onload
@@ -56,6 +54,31 @@
 			this.file = event.target.files[0];
 			console.log(this.file);
 			this.reader.readAsDataURL(this.file);
+		},
+		// ---------------------------------------------------------------------------------------------
+		// 2値化処理の実行
+		// ---------------------------------------------------------------------------------------------
+		execBinaryImageProcess: function() {
+			// グレイスケール化の方法
+			var graymode = $('#grayscale').val();
+			// 2値化処理の方法
+			var binaryway = $('#binary').val();
+			// 閾値による2値化の値取得
+			var threshold = $('#threshold').val();
+
+			// 元の画像を描画する
+			this.renderOriginalImage();
+			// 指定した方法でグレースケール化
+			this.renderGrayScale(graymode);
+			// 指定した方法で2値化
+			if ( binaryway === 'threshold' ) {
+				// しきい値による二値化
+				this.renderThresholdImage(threshold);
+			}
+			else if ( binaryway === 'patterndither' ) {
+				// パターンディザ
+				this.renderPatternDitherImage('bayer');
+			}
 		},
 		// ---------------------------------------------------------------------------------------------
 		// ---------------------------------------------------------------------------------------------

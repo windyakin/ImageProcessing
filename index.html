@@ -19,18 +19,27 @@
 
 	<div class="row">
 		<div class="col-xs-12 control">
-			<div class="control-box">
+			<div class="control-box form-inline">
 				<input type="file" id="file">
 
 				<button type="button" class="btn btn-default btn-sm" id="reset">画像リセット</button>
 
-				<label>グレースケール</label>
-				<div class="btn-group">
-					<button type="button" class="btn btn-default btn-sm" id="brightness">輝度</button>
-					<button type="button" class="btn btn-default btn-sm" id="saturation">彩度</button>
-					<button type="button" class="btn btn-default btn-sm" id="average">平均</button>	
-				</div>
-				
+				<label>グレースケールの方法</label>
+				<select class="form-control input-sm" id="grayscale">
+					<option value="brightness">輝度</option>
+					<option value="saturation">彩度</option>
+					<option value="average">平均</option>
+				</select>
+				<label>2値化の方法</label>
+				<select class="form-control input-sm" id="binary">
+					<option value="null">2値化しない</option>
+					<option value="threshold" selected="selected">しきい値</option>
+					<option value="patterndither">組織的ディザ法</option>
+					<option value="errordiffusion">誤差拡散法(動きません)</option>
+				</select>
+				<label>閾値</label> <input type="number" id="threshold" class="form-control input-sm" min="0" max="255" value="128">
+				<button type="button" class="btn btn-default btn-sm" id="threshold-exec">実行</button>
+
 			</div>
 		</div>
 	</div>
