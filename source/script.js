@@ -148,7 +148,7 @@
 				case 'brightness':
 					get = this.getLuminance;
 					break;
-				// 彩度	
+				// 彩度
 				case 'saturation':
 					get = this.getSaturation;
 					break;
@@ -268,8 +268,68 @@
 			}
 			// 作成した画像に置き換え
 			this.context.putImageData(create, 0, 0);
-		}
+		},
+		// ---------------------------------------------------------------------------------------------
+		// 誤差拡散法による2値化
+		// ---------------------------------------------------------------------------------------------
+		renderErrorDiffusionImage: function(value) {
+			var width = this.canvas.width;
+			var height = this.canvas.height;
+			var create = this.context.createImageData(width, height);
+			var origin = this.context.getImageData(0, 0, width, height);
+			for( var i = 0; i < origin.data.length/4; i++ ) {
+				var p = i*4;
+				// 画素値を取得
+				// if ( ! (origin.data[p] === origin.data[p+1] && origin.data[p] === origin.data[p+2]) ) {
+				// 	console.error("Please input gray scale image.");
+				// 	return;
+				// }
+				var pixel = origin.data[p];
+				var diff = pixel - value;
+				// 閾値で二値化
+				if ( pixel > value ) {
+					create.data[p+0] = 255;
+					create.data[p+1] = 255;
+					create.data[p+2] = 255;
+				}
+				else {
+					create.data[p+0] = 0;
+					create.data[p+1] = 0;
+					create.data[p+2] = 0;
+				}
+				create.data[p+3] = 255;
 
+				var dp = 0;
+
+				// f1
+				if ( (p + 1) % width != 0 ) {
+					var f1 = p + 1 * 4;
+					dp = Math.round(diff * 7/16);
+					origin.data[f1] += dp;
+				}
+
+				if ( p + width * 4 < origin.data.length ) {
+					// f2
+					if ( p % width != 0 ) {
+						var f2 = p + (width - 1) * 4;
+						dp = Math.round(diff * 4/16);
+						origin.data[f2] += dp;
+					}
+					// f3
+					var f3 = p + (width) * 4;
+					dp = Math.round(diff * 3/16);
+					origin.data[f3] += dp;
+					// f4
+					if ( (p + 1) % width != 0 ) {
+						var f4 = p + (width + 1) * 4;
+						dp = Math.round(diff * 15/16);
+						origin.data[f4] += dp;
+					}
+				}
+			}
+			// 作成した画像に置き換え
+			this.context.putImageData(create, 0, 0);
+		}
 	};
 
 	$(document).ready(function($) {
